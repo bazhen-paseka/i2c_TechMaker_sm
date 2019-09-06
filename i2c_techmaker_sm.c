@@ -337,3 +337,39 @@ uint16_t I2Cdev_writeWords(uint8_t devAddr, uint8_t regAddr, uint8_t length, uin
     HAL_StatusTypeDef status = HAL_I2C_Mem_Write(I2Cdev_hi2c, devAddr << 1, regAddr, I2C_MEMADD_SIZE_8BIT, (uint8_t *)pData, sizeof(uint16_t) * length, 1000);
     return status == HAL_OK;
 }
+
+//======================================================================
+void I2C_ScanBusFlow(I2C_HandleTypeDef * _hi2c, UART_HandleTypeDef * _huart)
+{
+	char DataChar[32];
+	int device_serial_numb = 0;
+
+	sprintf(DataChar,"Start scan I2C\r\n");
+	HAL_UART_Transmit(_huart, (uint8_t *)DataChar, strlen(DataChar), 100);
+	HAL_Delay(100);
+
+	for ( int sbf = 0x07; sbf < 0x78; sbf++)
+	{
+		if (HAL_I2C_IsDeviceReady(_hi2c, sbf << 1, 10, 100) == HAL_OK)
+		{
+			device_serial_numb++;
+			switch (sbf)
+			{
+				case 0x23: sprintf(DataChar,"%d) BH1750", device_serial_numb ); break;
+				case 0x27: sprintf(DataChar,"%d) FC113 ", device_serial_numb ); break;
+				case 0x57: sprintf(DataChar,"%d) AT24C32", device_serial_numb ); break;
+				case 0x68: sprintf(DataChar,"%d) DS3231", device_serial_numb ); break;
+				//case 0x68: sprintf(DataChar_I2C,"%d) MPU9250", device_serial_numb ); break;
+				case 0x76: sprintf(DataChar,"%d) BMP280", device_serial_numb ); break;
+				case 0x77: sprintf(DataChar,"%d) BMP180", device_serial_numb ); break;
+				default:   sprintf(DataChar,"%d) Unknown", device_serial_numb ); break;
+			}// end switch
+			sprintf(DataChar,"%s\r\n",DataChar);
+			HAL_UART_Transmit(_huart, (uint8_t *)DataChar, strlen(DataChar), 100);
+			HAL_Delay(10);
+		} //end if HAL I2C1
+	} // end for sbf i2c1
+	sprintf(DataChar,"End scan I2C\r\n");
+	HAL_UART_Transmit(_huart, (uint8_t *)DataChar, strlen(DataChar), 100);
+	HAL_Delay(100);
+}// end void I2C_ScanBus
