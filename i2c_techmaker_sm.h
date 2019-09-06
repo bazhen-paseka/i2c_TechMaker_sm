@@ -53,6 +53,7 @@ uint16_t I2Cdev_readTimeout;
 #define I2CDEV_DEFAULT_READ_TIMEOUT     1000
 
 void I2Cdev_init(I2C_HandleTypeDef * hi2c);
+void I2C_ScanBusFlow(I2C_HandleTypeDef * hi2c, UART_HandleTypeDef * huart);
 
 uint8_t I2Cdev_readBit(uint8_t devAddr, uint8_t regAddr, uint8_t bitNum, uint8_t *data, uint16_t timeout);
 uint8_t I2Cdev_readBitW(uint8_t devAddr, uint8_t regAddr, uint8_t bitNum, uint16_t *data, uint16_t timeout);
