@@ -357,14 +357,16 @@ void I2C_ScanBusFlow(I2C_HandleTypeDef * _hi2c, UART_HandleTypeDef * _huart)
 			{
 				case 0x23: sprintf(DataChar,"%d) BH1750", device_serial_numb ); break;
 				case 0x27: sprintf(DataChar,"%d) FC113 ", device_serial_numb ); break;
+				case 0x38: sprintf(DataChar,"%d) PCF8574", device_serial_numb ); break;
 				case 0x57: sprintf(DataChar,"%d) AT24C32", device_serial_numb ); break;
+
 				case 0x68: sprintf(DataChar,"%d) DS3231", device_serial_numb ); break;
 				//case 0x68: sprintf(DataChar_I2C,"%d) MPU9250", device_serial_numb ); break;
 				case 0x76: sprintf(DataChar,"%d) BMP280", device_serial_numb ); break;
 				case 0x77: sprintf(DataChar,"%d) BMP180", device_serial_numb ); break;
 				default:   sprintf(DataChar,"%d) Unknown", device_serial_numb ); break;
 			}// end switch
-			sprintf(DataChar,"%s\r\n",DataChar);
+			sprintf(DataChar,"%s Adr: %x\r\n", DataChar, sbf);
 			HAL_UART_Transmit(_huart, (uint8_t *)DataChar, strlen(DataChar), 100);
 			HAL_Delay(10);
 		} //end if HAL I2C1

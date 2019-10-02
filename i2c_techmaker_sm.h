@@ -33,12 +33,16 @@ THE SOFTWARE.
 #ifndef _I2C_TECHMAKER_SM_H_
 #define _I2C_TECHMAKER_SM_H_
 
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+#include "main.h"
+#include <stdio.h>
 
 // TODO: include depending on chip family
-#include "stm32f1xx_hal.h"
+//#include "stm32f1xx_hal.h"
 //#include "stm32f2xx_hal.h"
 //#include "stm32f3xx_hal.h"
 //#include "stm32f4xx_hal.h"
