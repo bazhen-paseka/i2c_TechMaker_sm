@@ -371,6 +371,11 @@ void I2C_ScanBusFlow(I2C_HandleTypeDef * _hi2c, UART_HandleTypeDef * _huart)
 			HAL_Delay(10);
 		} //end if HAL I2C1
 	} // end for sbf i2c1
+
+	if (device_serial_numb == 0) {
+		sprintf(DataChar,"---no devices found---\r\n");
+		HAL_UART_Transmit(_huart, (uint8_t *)DataChar, strlen(DataChar), 100);
+	}
 	sprintf(DataChar,"\tEnd scan I2C\r\n");
 	HAL_UART_Transmit(_huart, (uint8_t *)DataChar, strlen(DataChar), 100);
 	HAL_Delay(100);
