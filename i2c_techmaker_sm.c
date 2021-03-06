@@ -346,7 +346,6 @@ void I2C_ScanBusFlow(I2C_HandleTypeDef * _hi2c, UART_HandleTypeDef * _huart)
 
 	sprintf(DataChar,"\r\n\tStart scan I2C\r\n");
 	HAL_UART_Transmit(_huart, (uint8_t *)DataChar, strlen(DataChar), 100);
-	//	HAL_Delay(100);
 
 	for ( int sbf = 0x07; sbf < 0x78; sbf++)
 	{
@@ -378,5 +377,4 @@ void I2C_ScanBusFlow(I2C_HandleTypeDef * _hi2c, UART_HandleTypeDef * _huart)
 	}
 	sprintf(DataChar,"\tEnd scan I2C\r\n");
 	HAL_UART_Transmit(_huart, (uint8_t *)DataChar, strlen(DataChar), 100);
-	//	HAL_Delay(100);
 }// end void I2C_ScanBus
