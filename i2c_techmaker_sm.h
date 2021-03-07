@@ -77,4 +77,10 @@ uint16_t I2Cdev_writeWord(uint8_t devAddr, uint8_t regAddr, uint16_t data);
 uint16_t I2Cdev_writeBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t *data);
 uint16_t I2Cdev_writeWords(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint16_t *data);
 
+/*
+**************************************************************************
+*                                   END
+**************************************************************************
+*/
+
 #endif /* _I2C_TECHMAKER_SM_H_ */
