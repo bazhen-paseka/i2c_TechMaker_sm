@@ -354,16 +354,16 @@ void I2C_ScanBusFlow(I2C_HandleTypeDef * _hi2c, UART_HandleTypeDef * _huart)
 			device_serial_numb++;
 			switch (sbf)
 			{
-				case 0x23: sprintf(DataChar,"%d) bh-1750", device_serial_numb ); break;
-				case 0x27: sprintf(DataChar,"%d) fc-113 ", device_serial_numb ); break;
-				case 0x38: sprintf(DataChar,"%d) pcf-8574", device_serial_numb ); break;
-				case 0x57: sprintf(DataChar,"%d) at24c32", device_serial_numb ); break;
-				case 0x50: sprintf(DataChar,"%d) at24c256", device_serial_numb ); break;
-				case 0x68: sprintf(DataChar,"%d) ds-3231", device_serial_numb ); break;
-				//case 0x68: sprintf(DataChar_I2C,"%d) MPU9250", device_serial_numb ); break;
-				case 0x76: sprintf(DataChar,"%d) BMP280", device_serial_numb ); break;
-				case 0x77: sprintf(DataChar,"%d) BMP180", device_serial_numb ); break;
-				default:   sprintf(DataChar,"%d) Unknown", device_serial_numb ); break;
+				case 0x20: sprintf(DataChar,"%d) PCF-8574"			, device_serial_numb ) ; 	break ;
+				case 0x23: sprintf(DataChar,"%d) BH-1750"			, device_serial_numb ) ; 	break ;
+				case 0x27: sprintf(DataChar,"%d) FC113 "			, device_serial_numb ) ; 	break ;
+				case 0x38: sprintf(DataChar,"%d) PCF-8574"			, device_serial_numb ) ; 	break ;
+				case 0x57: sprintf(DataChar,"%d) AT24c32"			, device_serial_numb ) ; 	break ;
+				case 0x50: sprintf(DataChar,"%d) AT24c256"			, device_serial_numb ) ; 	break ;
+				case 0x68: sprintf(DataChar,"%d) DS3231 or MPU9250"	, device_serial_numb ) ; 	break ;
+				case 0x76: sprintf(DataChar,"%d) BMP280"			, device_serial_numb ) ; 	break ;
+				case 0x77: sprintf(DataChar,"%d) BMP180"			, device_serial_numb ) ; 	break ;
+				default:   sprintf(DataChar,"%d) Unknown"			, device_serial_numb ) ;	break ;
 			}// end switch
 			sprintf(DataChar,"%s\tAdr: 0x%x\r\n", DataChar, sbf);
 			HAL_UART_Transmit(_huart, (uint8_t *)DataChar, strlen(DataChar), 100);
