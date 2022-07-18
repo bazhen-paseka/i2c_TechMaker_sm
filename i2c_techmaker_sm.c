@@ -341,7 +341,7 @@ uint16_t I2Cdev_writeWords(uint8_t devAddr, uint8_t regAddr, uint8_t length, uin
 //======================================================================
 void I2C_ScanBusFlow(I2C_HandleTypeDef * _hi2c, UART_HandleTypeDef * _huart)
 {
-	char DataChar[32];
+	char DataChar[64];
 	int device_serial_numb = 0;
 
 	sprintf(DataChar,"\r\n\tStart scan I2C\r\n");
@@ -365,8 +365,9 @@ void I2C_ScanBusFlow(I2C_HandleTypeDef * _hi2c, UART_HandleTypeDef * _huart)
 				case 0x77: sprintf(DataChar,"%d) BMP180"			, device_serial_numb ) ; 	break ;
 				default:   sprintf(DataChar,"%d) Unknown"			, device_serial_numb ) ;	break ;
 			}// end switch
-			sprintf(DataChar,"%s\tAdr: 0x%x\r\n", DataChar, sbf);
-			HAL_UART_Transmit(_huart, (uint8_t *)DataChar, strlen(DataChar), 100);
+			char DataCharRes[96];
+			sprintf(DataCharRes,"%s\tAdr: 0x%x\r\n", DataChar, sbf);
+			HAL_UART_Transmit(_huart, (uint8_t *)DataCharRes, strlen(DataCharRes), 100);
 			HAL_Delay(10);
 		} //end if HAL I2C1
 	} // end for sbf i2c1
